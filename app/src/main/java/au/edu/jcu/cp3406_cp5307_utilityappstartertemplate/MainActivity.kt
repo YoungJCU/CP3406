@@ -106,7 +106,11 @@ fun UtilityScreen(viewModel: CryptoViewModel) {
                     CoinCard(
                             name = coin.name,
                             price = coin.currentPrice,
-                            currency = viewModel.currency
+                            currency = viewModel.currency,
+                            change24h = coin.change24h,
+                            change7d = coin.change7d,
+                            change30d = coin.change30d,
+                            change1y = coin.change1y
                     )
                 }
             }
@@ -128,16 +132,12 @@ fun SettingsScreen(viewModel: CryptoViewModel) {
                 style = MaterialTheme.typography.titleMedium
         )
 
-        Button(onClick = { viewModel.updateCurrency("usd") }) {
-            Text("🇺🇸 USD")
-        }
+        Button(onClick = { viewModel.updateCurrency("usd") }) { Text("🇺🇸 USD") }
 
-        Button(onClick = { viewModel.updateCurrency("eur") }) {
-            Text("🇪🇺 EUR")
-        }
+        Button(onClick = { viewModel.updateCurrency("eur") }) { Text("🇪🇺 EUR") }
 
-        Button(onClick = { viewModel.updateCurrency("sgd") }) {
-            Text("🇸🇬 SGD")
-        }
+        Button(onClick = { viewModel.updateCurrency("aud") }) { Text("🇦🇺 AUD") }
+
+        Button(onClick = { viewModel.updateCurrency("sgd") }) { Text("🇸🇬 SGD") }
     }
 }
