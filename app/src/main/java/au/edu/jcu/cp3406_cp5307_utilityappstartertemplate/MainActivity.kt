@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.di.ServiceLocator
+import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.LoginScreen
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.SettingsScreen
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.WeatherScreen
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.theme.CP3406_CP5603UtilityAppStarterTemplateTheme
@@ -49,30 +50,35 @@ fun UtilityAppPreview() {
 @Composable
 fun UtilityApp() {
     val viewModel = remember { ServiceLocator.createWeatherViewModel() }
+    var isLoggedIn by remember { mutableStateOf(false) }
     var selectedTab by remember { mutableStateOf("Weather") }
 
-    Scaffold(
-        bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Info, contentDescription = "Weather") },
-                    label = { Text("Weather") },
-                    selected = selectedTab == "Weather",
-                    onClick = { selectedTab = "Weather" }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
-                    label = { Text("Settings") },
-                    selected = selectedTab == "Settings",
-                    onClick = { selectedTab = "Settings" }
-                )
+    if (!isLoggedIn) {
+        LoginScreen(onLoginSuccess = { isLoggedIn = true })
+    } else {
+        Scaffold(
+            bottomBar = {
+                NavigationBar {
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Default.Info, contentDescription = "Weather") },
+                        label = { Text("Weather") },
+                        selected = selectedTab == "Weather",
+                        onClick = { selectedTab = "Weather" }
+                    )
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
+                        label = { Text("Settings") },
+                        selected = selectedTab == "Settings",
+                        onClick = { selectedTab = "Settings" }
+                    )
+                }
             }
-        }
-    ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            when (selectedTab) {
-                "Weather" -> WeatherScreen(viewModel)
-                "Settings" -> SettingsScreen(viewModel)
+        ) { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
+                when (selectedTab) {
+                    "Weather" -> WeatherScreen(viewModel)
+                    "Settings" -> SettingsScreen(viewModel)
+                }
             }
         }
     }

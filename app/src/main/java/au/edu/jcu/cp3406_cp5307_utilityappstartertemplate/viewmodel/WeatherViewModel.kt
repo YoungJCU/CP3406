@@ -26,7 +26,7 @@ class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() 
     private val _uiState = MutableStateFlow<WeatherUiState>(WeatherUiState.Loading)
     val uiState: StateFlow<WeatherUiState> = _uiState
 
-    private val _currentCity = MutableStateFlow<String>("Brisbane")
+    private val _currentCity = MutableStateFlow<String>("Singapore")
     val currentCity: StateFlow<String> = _currentCity
 
     private val _temperatureUnit = MutableStateFlow<String>("metric")
