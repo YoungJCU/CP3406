@@ -1,12 +1,14 @@
 package au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.data
 
+import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.BuildConfig
+
 /**
  * Repository pattern for weather data
  * Handles all data operations and abstracts the data source from the UI
  */
 class WeatherRepository(private val weatherApi: WeatherApi) {
 
-    private val apiKey = "b6fd43953d41a3fb51a186dd0d5026d8"  // OpenWeatherMap API key
+    private val apiKey = BuildConfig.OPENWEATHER_API_KEY  // Use API key from BuildConfig for better security
 
     /**
      * Fetch current weather for a given city
