@@ -46,7 +46,16 @@ class WeatherRepository(private val weatherApi: WeatherApi) {
             windSpeed = 4.2,
             tempMin = 26,
             tempMax = 31,
-            icon = "03d"
+            icon = "03d",
+            hourlyForecast = listOf(
+                HourlyForecast("Now", 29, "03d"),
+                HourlyForecast("14:00", 30, "03d"),
+                HourlyForecast("15:00", 31, "02d"),
+                HourlyForecast("16:00", 30, "02d"),
+                HourlyForecast("17:00", 28, "10d"),
+                HourlyForecast("18:00", 27, "10d"),
+                HourlyForecast("19:00", 26, "01n")
+            )
         )
     }
 

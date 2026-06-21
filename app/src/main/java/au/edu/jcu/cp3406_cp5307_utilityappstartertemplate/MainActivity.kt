@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.di.ServiceLocator
+import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.LocationsScreen
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.LoginScreen
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.SettingsScreen
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.WeatherScreen
@@ -66,6 +68,12 @@ fun UtilityApp() {
                         onClick = { selectedTab = "Weather" }
                     )
                     NavigationBarItem(
+                        icon = { Icon(Icons.Default.LocationOn, contentDescription = "Locations") },
+                        label = { Text("Locations") },
+                        selected = selectedTab == "Locations",
+                        onClick = { selectedTab = "Locations" }
+                    )
+                    NavigationBarItem(
                         icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
                         label = { Text("Settings") },
                         selected = selectedTab == "Settings",
@@ -77,6 +85,7 @@ fun UtilityApp() {
             Box(modifier = Modifier.padding(innerPadding)) {
                 when (selectedTab) {
                     "Weather" -> WeatherScreen(viewModel)
+                    "Locations" -> LocationsScreen(viewModel, onCitySelected = { selectedTab = "Weather" })
                     "Settings" -> SettingsScreen(viewModel)
                 }
             }

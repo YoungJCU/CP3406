@@ -127,6 +127,13 @@ data class WeatherUIModel(
     val windSpeed: Double,
     val tempMin: Int,
     val tempMax: Int,
+    val icon: String,
+    val hourlyForecast: List<HourlyForecast> = emptyList()
+)
+
+data class HourlyForecast(
+    val time: String,
+    val temp: Int,
     val icon: String
 )
 
